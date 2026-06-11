@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Portfolio de Kengne Sikadi Yvan Ornel, développeur web Fullstack junior passionné par l'automatisation, l'IA et les technologies modernes.">
+  <meta name="author" content="Kengne Sikadi Yvan Ornel">
+  <meta name="theme-color" content="#0f172a">
+  <title>Yvan Ornel | Développeur Fullstack Junior</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.2s ease;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    /* Light / Dark Theme Variables */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text-primary: #0a0a0a;
+      --text-secondary: #334155;
+      --border-light: #e2e8f0;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --gradient: linear-gradient(135deg, #2563eb, #38bdf8);
+      --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.3);
+    }
+
+    body.dark {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --card-bg: rgba(30, 41, 59, 0.85);
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --border-light: #334155;
+      --glass-border: rgba(255, 255, 255, 0.05);
+      --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Global */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 4px;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 0.9rem;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: scale(1.02);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(16px);
+      background: rgba(var(--bg-primary-rgb), 0.8);
+      z-index: 100;
+      border-bottom: 1px solid var(--border-light);
+      padding: 1rem 0;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--text-primary);
+      width: 40px;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 70%;
+        height: calc(100vh - 70px);
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 2rem;
+        transition: 0.3s;
+        box-shadow: 5px 0 20px rgba(0,0,0,0.1);
+        z-index: 99;
+      }
+      .nav-links.active {
+        left: 0;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-image {
+      flex: 0.8;
+      text-align: center;
+    }
+    .hero-image img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+      border: 3px solid var(--accent);
+      transition: transform 0.4s;
+    }
+    .hero-image img:hover {
+      transform: scale(1.02);
+    }
+    .badge {
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin: 0.5rem 0;
+    }
+    .typed-text {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--accent);
+      min-height: 70px;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    /* skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .skill-category {
+      padding: 1.5rem;
+      border-radius: 1.2rem;
+    }
+    .skill-category h3 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .skill-tag {
+      background: rgba(37, 99, 235, 0.15);
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      color: var(--accent);
+    }
+    body.dark .skill-tag {
+      background: rgba(56, 189, 248, 0.15);
+      color: #7dd3fc;
+    }
+    /* Contact */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .contact-info {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .contact-item i {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+      transition: opacity 0.2s;
+    }
+    .contact-item a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+    /* Footer */
+    footer {
+      background: var(--bg-secondary);
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .social-links a {
+      color: var(--text-secondary);
+      font-size: 1.4rem;
+      transition: color 0.2s;
+    }
+    .social-links a:hover {
+      color: var(--accent);
+    }
+    /* Animation reveal */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 680px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-image img { width: 200px; height: 200px; }
+    }
+    button, a { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">Yvan<span style="color:var(--accent)">.</span>Dev</div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Accueil</a>
+        <a href="#about">À propos</a>
+        <a href="#skills">Compétences</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div style="display: flex; gap: 0.8rem;">
+        <button class="theme-toggle" id="themeToggle" aria-label="Dark/Light mode"><i class="fas fa-moon"></i></button>
+        <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home">
+      <div class="container hero">
+        <div class="hero-content fade-up">
+          <div class="badge"><i class="fas fa-code"></i> Portfolio 2026</div>
+          <h1>Kengne Sikadi<br>Yvan Ornel</h1>
+          <div class="typed-text" id="typedText"></div>
+          <p style="margin: 1rem 0 1.5rem; color: var(--text-secondary); max-width: 550px;">
+            Développeur fullstack junior passionné, actuellement en train d’améliorer continuellement ses compétences en développement web, automatisation et outils d’intelligence artificielle. J’aime créer des applications web modernes, utiles et responsives tout en apprenant constamment de nouvelles technologies.
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary"><i class="fas fa-arrow-down"></i> Me contacter</a>
+            <a href="#" id="downloadCVbtn" class="btn btn-outline"><i class="fas fa-download"></i> Télécharger mon CV</a>
+          </div>
+        </div>
+        <div class="hero-image fade-up">
+          <!-- Remplacez l'URL par le chemin de votre propre photo -->
+          <img src="images 2/photo_2026-06-11_11-05-41.jpg" alt="Kengne Sikadi Yvan - Développeur Fullstack">
+          <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity:0.7"><i class="fas fa-camera"></i> Photo personnelle</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" style="background: var(--bg-secondary);">
+      <div class="container fade-up">
+        <h2>À propos</h2>
+        <div class="glass-card" style="padding: 2rem;">
+          <p style="margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.6;">
+            Je suis un développeur <strong>autodidacte</strong> passionné par la technologie et la résolution de problèmes complexes. 
+            Mon parcours est marqué par une <strong>apprentissage continu</strong> : je passe des heures à perfectionner mon code, explorer l'automatisation et l'IA. 
+            Aujourd'hui, je maîtrise les technologies Fullstack modernes et je crée des applications utiles, responsives, avec un souci du détail.
+          </p>
+          <p style="line-height: 1.6;">
+            <i class="fas fa-brain" style="color:var(--accent); margin-right: 8px;"></i> 
+            Je suis particulièrement intéressé par le développement Fullstack, l’automatisation de processus et l’intégration d’outils d’IA. 
+            Chaque projet est une opportunité d’apprendre plus vite et de repousser mes limites.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="skills">
+      <div class="container fade-up">
+        <h2>Compétences techniques</h2>
+        <div class="skills-grid">
+          <div class="skill-category glass-card">
+            <h3><i class="fas fa-code"></i> Frontend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">React</span><span class="skill-tag">Tailwind CSS</span>
+            </div>
+          </div>
+          <div class="skill-category glass-card">
+            <h3><i class="fas fa-server"></i> Backend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">MySQL</span>
+            </div>
+          </div>
+          <div class="skill-category glass-card">
+            <h3><i class="fas fa-tools"></i> Outils & workflow</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">Figma</span>
+              <span class="skill-tag">VS Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background: var(--bg-secondary);">
+      <div class="container fade-up">
+        <h2>Restons en contact</h2>
+        <div class="contact-grid">
+          <div class="contact-info glass-card" style="padding: 2rem;">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:Yvankengnesikadi@gmail.com">Yvankengnesikadi@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <i class="fab fa-whatsapp"></i>
+              <a href="https://wa.me/237696097532" target="_blank" rel="noopener noreferrer">+237 696 09 75 32</a>
+            </div>
+            <div class="contact-item">
+              <i class="fab fa-linkedin"></i>
+              <a href="https://linkedin.com/in/yvan-sikadi" target="_blank" rel="noopener noreferrer">linkedin.com/in/yvan-sikadi</a>
+            </div>
+            <div class="contact-item">
+              <i class="fab fa-github"></i>
+              <a href="https://github.com/Yvankengnesikadi-IT" target="_blank" rel="noopener noreferrer">github.com/Yvankengnesikadi-IT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/Yvankengnesikadi-IT" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/yvan-sikadi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/237696097532" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p>© 2026 Kengne Sikadi Yvan Ornel — Développeur Fullstack Junior. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Dark mode toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const icon = themeToggle.querySelector('i');
+    if(localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.add('fa-moon');
+    }
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if(body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        localStorage.setItem('theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('active'));
+    });
+
+    // Typed animation effect
+    const typedElement = document.getElementById('typedText');
+    const roles = ["Développeur Web Fullstack Junior", "Passionné d'IA & Automatisation", "Créateur d'expériences modernes"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typedElement.textContent = currentRole.substring(0, charIndex-1);
+        charIndex--;
+        if (charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(typeEffect, 300);
+        } else {
+          setTimeout(typeEffect, 50);
+        }
+      } else {
+        typedElement.textContent = currentRole.substring(0, charIndex+1);
+        charIndex++;
+        if (charIndex === currentRole.length) {
+          isDeleting = true;
+          setTimeout(typeEffect, 2000);
+        } else {
+          setTimeout(typeEffect, 100);
+        }
+      }
+    }
+    typeEffect();
+
+    // CV Download simulation
+    const downloadBtn = document.getElementById('downloadCVbtn');
+    downloadBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert("📄 Mon CV est en cours d'élaboration. Merci de me contacter directement pour le recevoir !");
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if(targetId === "#") return;
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll reveal with Intersection Observer
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    fadeElements.forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      fadeElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight-100) el.classList.add('visible');
+      });
+    });
+  </script>
+</body>
+</html>
